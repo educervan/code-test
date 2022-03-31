@@ -1,0 +1,14 @@
+header.header.feature-header {
+    padding-bottom: 56.25%;
+    width: 100%;
+    background: #4a4a4a!important;
+    background-size: cover!important;
+    background-position: 50%!important;
+    position: relative;
+    min-height: 500px;
+    overflow: hidden;
+    max-height: 100vh;
+    margin-top: 0;
+}
+
+form{display:block;}

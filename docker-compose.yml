@@ -1,0 +1,50 @@
+version: "3"
+services:
+  code-test-app:
+    build:
+      args:
+        user: cervan
+        uid: 1000
+      context: ./Docker
+      dockerfile: Dockerfile
+    image: code-test
+    container_name: code-test-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - storydriven
+
+  code-test-db:
+    image: mysql
+    container_name: code-test-db
+    restart: unless-stopped
+    environment:
+      MYSQL_HOST: ${DB_HOST}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: code-test
+      SERVICE_NAME: mysql
+    ports:
+      - 3309:3306
+    networks:
+      - storydriven
+
+  code-test-nginx:
+    image: nginx:alpine
+    container_name: code-test-nginx
+    restart: unless-stopped
+    ports:
+      - 9998:80
+    volumes:
+      - ./:/var/www
+      - ./Docker/nginx:/etc/nginx/conf.d/
+    networks:
+      - storydriven
+
+networks:
+  storydriven:
+    driver: bridge
