@@ -11,6 +11,9 @@ This project was build to support a code test for a developer position in StoryD
  - Nginx
  - Mysql
 
+ # Pre-Install
+- change the file .env.example to .env
+
 # Instructions
 
 To run the project, you will need have instaled in your enviroment
